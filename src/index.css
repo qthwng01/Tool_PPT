@@ -1,0 +1,106 @@
+* {
+  font-family: var(--font-montserrat);
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  font-family: var(--font-montserrat);
+  font-optical-sizing: auto;
+  font-size: 1rem;
+  line-height: 1.5;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-height: 100vh;
+}
+
+#root {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+.tools {
+  width: 100%;
+  border: 0.5px solid #e2e8f0;
+  padding: 3rem 0 6rem 1rem;
+  border-radius: 6px;
+}
+
+.info {
+  margin: auto 0;
+  padding: 0 7rem;
+}
+
+.info .info__text {
+  font-size: 16px;
+  font-weight: 700;
+  text-align: start;
+}
+
+.info .input__info {
+  margin-bottom: 1rem;
+}
+
+.tools h1 {
+  margin-bottom: 2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.tools .tools_inside {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 6px;
+}
+
+.tools .tools_inside #folderLabel {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#excelUpload, #folderUpload {
+  border-radius: 8px;
+  border: 1px solid #319795;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+#excelUpload, #folderUpload:hover {
+  border-color: #319795;
+}
+#excelUpload:focus, #folderUpload:focus,
+#excelUpload:focus-visible, #folderUpload:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
