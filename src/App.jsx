@@ -93,7 +93,7 @@ const App = () => {
             h: "10%",
             color: "#D41C4C",
             bold: true,
-            fontSize: 22.2,
+            fontSize: 22.6,
             fontFace: 'Segoe UI'
           });
 
