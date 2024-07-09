@@ -5,6 +5,7 @@ import { useState, useRef } from "react";
 import PptxGenJS from "pptxgenjs";
 import * as XLSX from "xlsx";
 import { Input, Text, Button } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 const App = () => {
   const [folders, setFolders] = useState([]);
@@ -282,7 +283,7 @@ const App = () => {
             Tạo .PPTX
           </Button>
         </div>
-        <a
+        <Link
           style={{
             paddingTop: "8px",
             float: "left",
@@ -290,10 +291,10 @@ const App = () => {
             color: "blue",
             textDecoration: "underline",
           }}
-          href="/test"
+          to="/test"
         >
           Kiểm tra tên đại lí
-        </a>
+        </Link>
       </div>
     </div>
   );
