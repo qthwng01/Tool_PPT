@@ -6,8 +6,9 @@ import PptxGenJS from "pptxgenjs";
 import * as XLSX from "xlsx";
 import { Input, Text, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import Confetti from "./Confetti";
 
-const App = () => {
+const Tool = () => {
   const [folders, setFolders] = useState([]);
   const [excels, setExcels] = useState([]);
   const [region, setRegion] = useState("");
@@ -28,11 +29,14 @@ const App = () => {
   // Kiểm tra cName
   function checkCName(str) {
     if (str.startsWith("TP ") || str.startsWith("TP.")) {
-        return str.replace("TP ", "TP.").replace(/\(|\)/g, '');
+      return str.replace("TP ", "TP.").replace(/\(|\)/g, "");
     } else if (str.startsWith("H. ") || str.startsWith("H.")) {
-        return str.replace("H. ", "Huyện ").replace("H.", "Huyện ").replace(/\(|\)/g, '');
+      return str
+        .replace("H. ", "Huyện ")
+        .replace("H.", "Huyện ")
+        .replace(/\(|\)/g, "");
     } else {
-        return str.replace(/\(|\)/g, '');
+      return str.replace(/\(|\)/g, "");
     }
   }
 
@@ -104,7 +108,8 @@ const App = () => {
             // Tạo slide mới và đặ tên từ tên thư mục
             const slide = pptx.addSlide();
             slide.addText(
-              `${region} – ${city} – ${checkCName(infoOnExcel.qh)} - ĐL ` + folder.name,
+              `${region} – ${city} – ${checkCName(infoOnExcel.qh)} - ĐL ` +
+                folder.name,
               {
                 x: 1,
                 y: 0.5,
@@ -235,10 +240,17 @@ const App = () => {
     setFolders([]);
   };
 
+  // Confetti
+  // function Confetti2() {
+  //   return <Confetti />
+  // }
+
   return (
     <div className="tools">
-      <h1>Người đẹp Thuý Hiển & quái vật Quốc Thắng</h1>
-      <div className="info">
+      <h1>
+        <span>FB88</span> Nhà Cái Đến Từ Việt Nam
+      </h1>
+      <div className="info" style={{ height: "auto" }}>
         <Text className="info__text" mb="8px">
           Tên vùng
           <span style={{ color: "red" }}>*</span>
@@ -258,7 +270,10 @@ const App = () => {
           placeholder="Nhập tên tỉnh"
         />
         <div className="tools_inside">
-          {/* <label id="folderLabel">Úp Folder Dô</label> */}
+          <Text className="info__text" mb="8px">
+            Folder
+            <span style={{ color: "red" }}>*</span>
+          </Text>
           <input
             type="file"
             id="folderUpload"
@@ -267,7 +282,12 @@ const App = () => {
             ref={fileInputRef}
             onChange={handleFolderUpload}
           />
+          <Text className="info__text" mb="8px">
+            Excel
+            <span style={{ color: "red" }}>*</span>
+          </Text>
           <input
+            placeholder="Excel"
             type="file"
             id="excelUpload"
             accept=".xlsx, .xls"
@@ -280,14 +300,14 @@ const App = () => {
             colorScheme="teal"
             size="lg"
           >
-            Tạo .PPTX
+            Tạo PowerPoint
           </Button>
         </div>
         <Link
           style={{
             paddingTop: "8px",
             float: "left",
-            fontWeight: "600",
+            fontWeight: "800",
             color: "blue",
             textDecoration: "underline",
           }}
@@ -300,4 +320,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Tool;

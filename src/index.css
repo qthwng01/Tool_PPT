@@ -49,7 +49,7 @@ h1 {
 .tools {
   width: 100%;
   border: 0.5px solid #e2e8f0;
-  padding: 3rem 0 6rem 1rem;
+  padding: 3rem 1rem 6rem 1rem;
   border-radius: 6px;
 }
 
@@ -74,19 +74,36 @@ h1 {
   text-transform: uppercase;
 }
 
-.tools .tools_inside {
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  gap: 6px;
+.tools h1 span {
+  color: #319795;
+  text-transform: uppercase;
 }
 
-.tools .tools_inside #folderLabel {
-  font-size: 20px;
+.tools .tools_inside {
+  width: 100%;
+  height: auto;
+}
+
+.tools .test {
+  padding: 0 1rem 0 1rem;
+}
+
+.tools .test p {
+  float: left;
   font-weight: bold;
 }
 
-#excelUpload, #folderUpload {
+.tools .tools_inside #folderLabel {
+  float: left;
+  margin-bottom: 4px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+#excelUpload,
+#folderUpload {
+  width: 100%;
+  margin-bottom: 1rem;
   border-radius: 8px;
   border: 1px solid #319795;
   padding: 0.6em 1.2em;
@@ -97,11 +114,16 @@ h1 {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-#excelUpload, #folderUpload:hover {
+
+#excelUpload,
+#folderUpload:hover {
   border-color: #319795;
 }
-#excelUpload:focus, #folderUpload:focus,
-#excelUpload:focus-visible, #folderUpload:focus-visible {
+
+#excelUpload:focus,
+#folderUpload:focus,
+#excelUpload:focus-visible,
+#folderUpload:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 

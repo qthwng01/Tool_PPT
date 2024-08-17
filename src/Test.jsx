@@ -1,14 +1,14 @@
 /* eslint-disable react/no-unknown-property */
-import React, { useState } from "react";
+import { useState } from "react";
 import * as XLSX from "xlsx";
-import { Button } from "@chakra-ui/react";
+import { Button, Text } from "@chakra-ui/react";
 
-const App = () => {
+const Test = () => {
   const [dataExcels, setDataExcels] = useState([]);
   const [folders, setFolders] = useState([]);
   const [uniqueNames, setUniqueNames] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [success, setSuccess] = useState('')
+  const [success, setSuccess] = useState("");
 
   function checkString(str) {
     // Kiểm tra xem chuỗi có chứa mẫu " (" hay không
@@ -73,7 +73,7 @@ const App = () => {
         ]);
         return { dl: "", qh: "", gc: "" };
       } else {
-        setSuccess("Tên đại lý đều đúng.")
+        setSuccess("Tên đại lý đều đúng.");
       }
 
       const data = arrs.find(
@@ -108,12 +108,13 @@ const App = () => {
   };
 
   return (
-    <React.Fragment>
-      <h1 style={{ textTransform: "uppercase", marginBottom: "1rem" }}>
-        Kiểm tra tên đại lý
-      </h1>
+    <div className="tools">
+      <h1>Kiểm tra tên đại lý</h1>
       <div className="test">
-        <h3>Upload Folder</h3>
+        <Text className="info__text" mb="8px">
+          Úp Folder
+          <span style={{ color: "red" }}>*</span>
+        </Text>
         <input
           type="file"
           id="folderUpload"
@@ -122,7 +123,10 @@ const App = () => {
           onChange={handleFolderUpload}
         />
         <br />
-        <h3>Upload Excel</h3>
+        <Text className="info__text" mb="8px">
+          Úp Excel
+          <span style={{ color: "red" }}>*</span>
+        </Text>
         <input
           type="file"
           accept=".xlsx, .xls"
@@ -146,8 +150,8 @@ const App = () => {
         ))}
       </ul>
       {success && <h3>{success}</h3>}
-    </React.Fragment>
+    </div>
   );
 };
 
-export default App;
+export default Test;
