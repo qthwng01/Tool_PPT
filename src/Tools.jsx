@@ -7,6 +7,7 @@ import * as XLSX from "xlsx";
 import { Input, Text, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import JSConfetti from "js-confetti";
+import videoSrc from "/corgi.mp4";
 
 const Tool = () => {
   const [folders, setFolders] = useState([]);
@@ -254,6 +255,18 @@ const Tool = () => {
       <h1>
         <span>FB88</span> Nhà Cái Đến Từ Việt Nam
       </h1>
+      <div className="corgi">
+        <video
+          className="pointer-events-none"
+          playsInline
+          preload="none"
+          muted
+          autoPlay
+          loop
+        >
+          <source src={videoSrc} type="video/mp4" />
+        </video>
+      </div>
       <div className="info" style={{ height: "auto" }}>
         <Text className="info__text" mb="8px">
           Tên vùng
