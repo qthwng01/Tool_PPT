@@ -6,7 +6,7 @@ import PptxGenJS from "pptxgenjs";
 import * as XLSX from "xlsx";
 import { Input, Text, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import Confetti from "./Confetti";
+import JSConfetti from "js-confetti";
 
 const Tool = () => {
   const [folders, setFolders] = useState([]);
@@ -74,6 +74,12 @@ const Tool = () => {
       setExcels(jsonData);
     };
     reader.readAsArrayBuffer(file);
+  };
+
+  // Confetti
+  const Confetti = () => {
+    const jsConfetti = new JSConfetti();
+    return jsConfetti.addConfetti();
   };
 
   // Lọc dữ liệu excel theo tên của folder
@@ -221,6 +227,9 @@ const Tool = () => {
               resetState();
               setIsLoading(false);
             }, 2000);
+            setTimeout(() => {
+              Confetti();
+            }, 3000);
           });
         }
       }
@@ -239,11 +248,6 @@ const Tool = () => {
     excelInputRef.current.value = "";
     setFolders([]);
   };
-
-  // Confetti
-  // function Confetti2() {
-  //   return <Confetti />
-  // }
 
   return (
     <div className="tools">
