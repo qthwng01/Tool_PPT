@@ -255,7 +255,7 @@ const Tool = () => {
       <h1>
         <span>FB88</span> Nhà Cái Đến Từ Việt Nam
       </h1>
-      <div className="corgi">
+      {/* <div className="corgi">
         <video
           className="pointer-events-none"
           playsInline
@@ -266,7 +266,7 @@ const Tool = () => {
         >
           <source src={videoSrc} type="video/mp4" />
         </video>
-      </div>
+      </div> */}
       <div className="info" style={{ height: "auto" }}>
         <Text className="info__text" mb="8px">
           Tên vùng

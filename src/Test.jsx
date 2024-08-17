@@ -9,6 +9,7 @@ const Test = () => {
   const [uniqueNames, setUniqueNames] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState("");
+  const [errorName, setErrorName] = useState(false);
 
   function checkString(str) {
     // Kiểm tra xem chuỗi có chứa mẫu " (" hay không
@@ -71,9 +72,14 @@ const Test = () => {
           ...prevLogs,
           `Không tìm thấy kết quả phù hợp với tên: ${name}`,
         ]);
+        // Check tên không tìm thấy
+        if (name) {
+          setErrorName(true);
+        }
+        //  else {
+        //   setSuccess("");
+        // }
         return { dl: "", qh: "", gc: "" };
-      } else {
-        setSuccess("Tên đại lý đều đúng.");
       }
 
       const data = arrs.find(
@@ -89,6 +95,7 @@ const Test = () => {
       const qh = data["Quận - Huyện"] || "";
       const gc = data["GHI CHÚ"] || "";
       setIsLoading(false);
+      setSuccess('Tất cả đều đúng.')
       return { dl, qh, gc };
     } catch (error) {
       setIsLoading(false);
@@ -133,6 +140,7 @@ const Test = () => {
           id="excelUpload"
           onChange={handleExcelUpload}
         />
+        <h3>(Nhớ F5 lại rồi check tiếp)</h3>
       </div>
       <Button
         isLoading={isLoading}
@@ -149,7 +157,12 @@ const Test = () => {
           </li>
         ))}
       </ul>
-      {success && <h3>{success}</h3>}
+      {/* {errorName && (
+        <h3 style={{ fontSize: 30, fontWeight: 800 }}>
+          Sai! Kiểm tra lại tên đại lý.
+        </h3>
+      )} */}
+      {success && !errorName && <h3 style={{ fontSize: 30, fontWeight: 800 }}>{success}</h3>}
     </div>
   );
 };
