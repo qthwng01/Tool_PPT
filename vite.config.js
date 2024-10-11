@@ -14,4 +14,14 @@ export default defineConfig({
     globals: true,
     setupFiles: "./tests/setup.js",
   },
+  build: {
+    rollupOptions: {
+      external: ["react"],
+      output: {
+        globals: {
+          react: "React",
+        },
+      },
+    },
+  },
 });
