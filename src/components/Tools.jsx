@@ -7,9 +7,8 @@ import * as XLSX from "xlsx";
 import { Input, Text, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import JSConfetti from "js-confetti";
-import videoSrc from "/corgi.mp4";
 
-const Tool = () => {
+const Tools = () => {
   const [folders, setFolders] = useState([]);
   const [excels, setExcels] = useState([]);
   const [region, setRegion] = useState("");
@@ -141,40 +140,19 @@ const Tool = () => {
             const fileCount = folder.files.length;
             let imgWidth, imgHeight, rows, cols, startY;
 
-            // if (fileCount < 3) {
-            //   imgWidth = 3.5;
-            //   imgHeight = 2.625;
-            //   rows = 1;
-            //   cols = fileCount;
-            // } else if (fileCount === 4) {
-            //   imgWidth = 2.5;
-            //   imgHeight = 1.875;
-            //   rows = 2;
-            //   cols = 2;
-            // } else if (fileCount === 5) {
-            //   imgWidth = 2.5;
-            //   imgHeight = 1.875;
-            //   rows = 2;
-            //   cols = 3;
-            // } else {
-            //   imgWidth = 2.5;
-            //   imgHeight = 1.875;
-            //   rows = 2;
-            //   cols = 3;
-            // }
-
             if (fileCount < 3) {
-              imgWidth = 3.5;
+              imgWidth = 2.625;
               imgHeight = 2.625;
               rows = 1;
               cols = fileCount;
               startY = 0.5 + 30 / 72 + 70 / 96; // cách 10px từ text trên slide
             } else if (fileCount === 3) {
-              imgWidth = 3.0;
-              imgHeight = 2.25;
+              imgWidth = 2.25;
+              imgHeight = 2.625;
               rows = 1;
               cols = fileCount;
               startY = 0.5 + 30 / 72 + 70 / 96; // cách 10px từ text trên slide
+              //startY = 1.5
             } else if (fileCount === 4) {
               imgWidth = 2.5;
               imgHeight = 1.875;
@@ -182,7 +160,7 @@ const Tool = () => {
               cols = 2;
               startY = 1; // giữ nguyên vị trí
             } else if (fileCount === 5) {
-              imgWidth = 2.5;
+              imgWidth = 2;
               imgHeight = 1.875;
               rows = 2;
               cols = 3;
@@ -196,7 +174,7 @@ const Tool = () => {
             }
 
             const totalWidth = cols * imgWidth + (cols - 1) * 0.2;
-            const startX = (10 - totalWidth) / 2; // Căn giữa slide với chiều rộng slide là 10 inch
+            const startX = (10 - totalWidth) / 2; // Căn giữa slide với chiều rộng slide là cách trái 10 inch
             //startY = 1;
 
             folder.files.forEach((file, index) => {
@@ -205,16 +183,39 @@ const Tool = () => {
                 reader.onload = (e) => {
                   const col = index % cols;
                   const row = Math.floor(index / cols);
-                  const x = startX + col * (imgWidth + 0.2);
-                  const y = startY + row * (imgHeight + 0.2);
-                  slide.addImage({
-                    data: e.target.result,
-                    x,
-                    y,
-                    w: imgWidth,
-                    h: imgHeight,
-                  });
-                  resolve();
+                  const x = startX + col * (imgWidth + 0.05);
+                  const y = startY + row * (imgHeight + 0.05);
+                  
+                  const img = new Image(); // Create an image element to get original width and height
+                  img.src = e.target.result;
+                  img.onload = () => {
+                    const originalWidth = img.width;
+                    const originalHeight = img.height;
+                    
+                    // Calculate aspect ratio of the image
+                    const aspectRatio = originalWidth / originalHeight;
+            
+                    // Adjust width and height based on aspect ratio
+                    let finalWidth = imgWidth;
+                    let finalHeight = imgHeight;
+            
+                    if (aspectRatio > 1) { // Landscape
+                      finalHeight = imgWidth / aspectRatio;
+                    } else { // Portrait or square
+                      finalWidth = imgHeight * aspectRatio;
+                    }
+            
+                    // Add the image to the slide with the adjusted size
+                    slide.addImage({
+                      data: e.target.result,
+                      x,
+                      y,
+                      w: finalWidth,
+                      h: finalHeight,
+                      sizing: 'contain' // This ensures it keeps its aspect ratio
+                    });
+                  };
+                  resolve()
                 };
                 reader.readAsDataURL(file);
               });
@@ -243,7 +244,7 @@ const Tool = () => {
     }
   };
 
-  // Hàm reset State
+  // Hàm reset state
   const resetState = () => {
     fileInputRef.current.value = "";
     excelInputRef.current.value = "";
@@ -255,18 +256,6 @@ const Tool = () => {
       <h1>
         <span>FB88</span> Nhà Cái Đến Từ Việt Nam
       </h1>
-      {/* <div className="corgi">
-        <video
-          className="pointer-events-none"
-          playsInline
-          preload="none"
-          muted
-          autoPlay
-          loop
-        >
-          <source src={videoSrc} type="video/mp4" />
-        </video>
-      </div> */}
       <div className="info" style={{ height: "auto" }}>
         <Text className="info__text" mb="8px">
           Tên vùng
@@ -330,11 +319,11 @@ const Tool = () => {
           }}
           to="/test"
         >
-          Kiểm tra tên đại lí
+          Kiểm tra tên đại lý
         </Link>
       </div>
     </div>
   );
 };
 
-export default Tool;
+export default Tools;

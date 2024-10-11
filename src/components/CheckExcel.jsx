@@ -3,7 +3,7 @@ import { useState } from "react";
 import * as XLSX from "xlsx";
 import { Button, Text } from "@chakra-ui/react";
 
-const Test = () => {
+const CheckExcel = () => {
   const [dataExcels, setDataExcels] = useState([]);
   const [folders, setFolders] = useState([]);
   const [uniqueNames, setUniqueNames] = useState([]);
@@ -20,6 +20,7 @@ const Test = () => {
     }
   }
 
+  // Hàm xử lý file excel
   const handleExcelUpload = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -95,7 +96,7 @@ const Test = () => {
       const qh = data["Quận - Huyện"] || "";
       const gc = data["GHI CHÚ"] || "";
       setIsLoading(false);
-      setSuccess('Tất cả đều đúng.')
+      setSuccess("Tất cả đều đúng.");
       return { dl, qh, gc };
     } catch (error) {
       setIsLoading(false);
@@ -104,7 +105,8 @@ const Test = () => {
     }
   };
 
-  const readData = () => {
+  // Đọc folder và excel
+ const readData = () => {
     if (folders.length === 0 || dataExcels.length === 0) {
       alert("Chưa có bỏ folder, excel dô cà.");
     } else {
@@ -162,9 +164,11 @@ const Test = () => {
           Sai! Kiểm tra lại tên đại lý.
         </h3>
       )} */}
-      {success && !errorName && <h3 style={{ fontSize: 30, fontWeight: 800 }}>{success}</h3>}
+      {success && !errorName && (
+        <h3 style={{ fontSize: 30, fontWeight: 800 }}>{success}</h3>
+      )}
     </div>
   );
 };
 
-export default Test;
+export default CheckExcel;
